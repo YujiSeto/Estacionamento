@@ -221,10 +221,13 @@ namespace Estacionamento
             Console.WriteLine("Programa Finalizado");
             Console.ReadKey();
 
+            Thread t1 = new Thread(new ThreadStart(Kirbydance)); //Criação da Thread que Finaliza o Programa com Estilo
+            t1.Start();
+
             void OcuparVaga()
             {
                 Semaforo.WaitOne(); //Inicio do Semaforo que permite apenas uma Thread por vez
-                Thread.Sleep(tempodeespera); //Espera de 0,5 Segundos
+                Thread.Sleep(tempodeespera); //Espera do veiculo
                 qtdvagasdisponiveis--; //Diminuir a quantidade de Vagas Disponíveis
                 qtdvagasocupadas++; //Aumentar a quantidade de Vagas Ocupadas
                 numerovaga++; //Avançar para a próxima Vaga Livre
@@ -240,6 +243,33 @@ namespace Estacionamento
                 qtdvagasdisponiveis++; //Aumentar a quantidade de Vagas Disponíveis
                 qtdvagasocupadas--; //Diminuir a quantidade de Vagas Ocupadas
                 numerovaga--; //Liberar Vaga e retornar para a Vaga Anterior
+                Semaforo.Release(); //Fim do Semáforo
+            }
+
+            void Kirbydance()
+            {
+                Semaforo.WaitOne(); //Inicio do Semaforo que permite apenas uma Thread por vez
+                Console.Clear();
+                Console.WriteLine(" (> '-')>");
+                Thread.Sleep(1000); //Espera de 1 Segundos
+                Console.Clear();
+                Console.WriteLine("<('-' <)");
+                Thread.Sleep(1000); //Espera de 1 Segundos
+                Console.Clear();
+                Console.WriteLine("^( '-' )^");
+                Thread.Sleep(1000); //Espera de 1 Segundos
+                Console.Clear();
+                Console.WriteLine("v( '-' )v");
+                Thread.Sleep(1000); //Espera de 1 Segundos
+                Console.Clear();
+                Console.WriteLine(" (> '-')>");
+                Thread.Sleep(1000); //Espera de 1 Segundos
+                Console.Clear();
+                Console.WriteLine(" ( ^-^ )");
+                Thread.Sleep(1000); //Espera de 1 Segundos
+                Console.Clear();
+                Console.WriteLine(" F I M ");
+                Thread.Sleep(1000); //Espera de 1 Segundos
                 Semaforo.Release(); //Fim do Semáforo
             }
 
