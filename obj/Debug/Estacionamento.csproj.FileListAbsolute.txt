@@ -1,0 +1,6 @@
+C:\Users\rodri\source\repos\Estacionamento\bin\Debug\Estacionamento.exe.config
+C:\Users\rodri\source\repos\Estacionamento\bin\Debug\Estacionamento.exe
+C:\Users\rodri\source\repos\Estacionamento\bin\Debug\Estacionamento.pdb
+C:\Users\rodri\source\repos\Estacionamento\obj\Debug\Estacionamento.csprojAssemblyReference.cache
+C:\Users\rodri\source\repos\Estacionamento\obj\Debug\Estacionamento.exe
+C:\Users\rodri\source\repos\Estacionamento\obj\Debug\Estacionamento.pdb
