@@ -33,6 +33,8 @@ namespace Estacionamento
             int qtdveiculos = 0;            // Quantidade de Veículos Entrando ou Saindo
             int i;                          // Controle de FOR
             int numeroveiculo = 1;          // Número do Veículo Entrando ou Saindo
+            int numerovaga = 0;             // Número da Vaga
+            int tempodeespera = 000;        // Tempo de Espera para Entrada e Saída de Veículos
             Semaforo = new Semaphore(1, 1); // Configuração do Semaforo que permite uma Thread por vez
 
             do
@@ -222,20 +224,22 @@ namespace Estacionamento
             void OcuparVaga()
             {
                 Semaforo.WaitOne(); //Inicio do Semaforo que permite apenas uma Thread por vez
-                Thread.Sleep(500); //Espera de 0,5 Segundos
+                Thread.Sleep(tempodeespera); //Espera de 0,5 Segundos
                 qtdvagasdisponiveis--; //Diminuir a quantidade de Vagas Disponíveis
-                qtdvagasocupadas++; //Diminuir a quantidade de Vagas Ocupadas
-                Console.WriteLine("O " + System.Threading.Thread.CurrentThread.Name + " preencheu a vaga"); //Descrição da Thread que está atuando
+                qtdvagasocupadas++; //Aumentar a quantidade de Vagas Ocupadas
+                numerovaga++; //Avançar para a próxima Vaga Livre
+                Console.WriteLine("O " + System.Threading.Thread.CurrentThread.Name + " preencheu a vaga nº" + numerovaga); //Descrição da Thread que está atuando
                 Semaforo.Release(); //Fim do Semáforo
             }
 
             void LiberarVaga()
             {
                 Semaforo.WaitOne(); //Inicio do Semaforo que permite apenas uma Thread por vez
-                Thread.Sleep(500); //Espera de 0,5 Segundos
-                Console.WriteLine("O " + System.Threading.Thread.CurrentThread.Name + " liberou a vaga"); //Descrição da Thread que está atuando
+                Thread.Sleep(tempodeespera); //Espera de 0,5 Segundos
+                Console.WriteLine("O " + System.Threading.Thread.CurrentThread.Name + " liberou a vaga nº" + numerovaga); //Descrição da Thread que está atuando
                 qtdvagasdisponiveis++; //Aumentar a quantidade de Vagas Disponíveis
                 qtdvagasocupadas--; //Diminuir a quantidade de Vagas Ocupadas
+                numerovaga--; //Liberar Vaga e retornar para a Vaga Anterior
                 Semaforo.Release(); //Fim do Semáforo
             }
 
